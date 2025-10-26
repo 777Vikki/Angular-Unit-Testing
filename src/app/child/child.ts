@@ -7,5 +7,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './child.scss',
 })
 export class Child {
-  @Input() name: string | undefined;
+  @Input() userName: string | undefined;
 }

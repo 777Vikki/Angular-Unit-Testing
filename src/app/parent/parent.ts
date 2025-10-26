@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Child } from '../child/child';
 
 @Component({
@@ -7,6 +7,10 @@ import { Child } from '../child/child';
   templateUrl: './parent.html',
   styleUrl: './parent.scss',
 })
-export class Parent {
+export class Parent implements OnInit{
  name: string | undefined;
+
+ ngOnInit(): void {
+   this.name = 'Vivek';
+ }
 }
