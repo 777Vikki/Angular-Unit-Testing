@@ -104,10 +104,10 @@ import { of } from 'rxjs';
         "role": "admin"
       }
 
-      spyOn(userService, 'getUserDetail').and.returnValue(of(mockResponse));
+      const spy = spyOn(userService, 'getUserDetail').and.returnValue(of(mockResponse));
       component.ngOnInit();
 
-      expect(userService.getUserDetail).toHaveBeenCalledWith(1);
+      expect(spy).toHaveBeenCalledWith(1); // OR expect(userService.getUserDetail).toHaveBeenCalledWith(1);
       expect(component.userDetail).toEqual(mockResponse);
     });
 
