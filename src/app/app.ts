@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { UserService, IUser, IUserCart } from './user-service';
+import { UserService, IUser, IUserCart, IProduct } from './user-service';
 
 @Component({
   selector: 'app-root',
@@ -34,5 +34,9 @@ export class App implements OnInit {
         this.userCardList = res;
       },
     });
+  }
+
+  updateUserCard(productList: IProduct[]) {
+    this.userService.updateUserCard(productList);
   }
 }
