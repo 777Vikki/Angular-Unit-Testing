@@ -85,4 +85,8 @@ export class UserService {
   getUserCartList(id: number): Observable<IUserCart[]> {
     return this.http.get<ICard>('https://dummyjson.com/users/' + id + '/carts').pipe(map(this.mapCardDetail))
   }
+
+  updateUserCard(products: IProduct[]) {
+    console.log(products);
+  }
 }

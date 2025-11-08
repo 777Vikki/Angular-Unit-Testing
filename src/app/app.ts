@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { UserService, IUser, IUserCart } from './user-service';
+import { UserService, IUser, IUserCart, IProduct } from './user-service';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +19,7 @@ export class App implements OnInit {
   }
 
   getUserDetail() {
-    if(!this.userId) return undefined;
+    if (!this.userId) return undefined;
     this.userService.getUserDetail(this.userId).subscribe({
       next: res => {
         this.userDetail = res;
@@ -28,11 +28,15 @@ export class App implements OnInit {
   }
 
   getUserCartList() {
-    if(!this.userId) return undefined;
+    if (!this.userId) return undefined;
     this.userService.getUserCartList(this.userId).subscribe({
       next: res => {
         this.userCardList = res;
       },
     });
+  }
+
+  updateUserCard(productList: IProduct[]) {
+    this.userService.updateUserCard(productList);
   }
 }

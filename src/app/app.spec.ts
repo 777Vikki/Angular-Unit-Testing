@@ -2,7 +2,7 @@ import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { App } from './app';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { UserService, IUser, IUserCart } from './user-service';
+import { UserService, IUser, IUserCart, IProduct } from './user-service';
 import { of } from 'rxjs';
 
 describe('App', () => {
@@ -61,36 +61,34 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should call getUserDetail from UserService', () => {
-    const spy = spyOn(userService, 'getUserDetail').and.callThrough();
-    fixture.detectChanges();
-    expect(spy).toHaveBeenCalledWith(mockUserDetail.id);
-    expect(spy).toHaveBeenCalled();
-    expect(spy).toHaveBeenCalledTimes(1);
-  });
-
-  it('should call getUserCartList from UserService', () => {
-    const spy = spyOn(userService, 'getUserCartList').and.returnValue(of(mockUserCartList));
-    fixture.detectChanges();
-    component.getUserCartList();
-    expect(spy).toHaveBeenCalledWith(mockUserDetail.id);
-    expect(spy).toHaveBeenCalled();
-    expect(spy).toHaveBeenCalledTimes(1);
-  });
-
   it('should return user detail when getUserDetail is called', () => {
+    component.userId = mockUserDetail.id;
     const spy = spyOn(userService, 'getUserDetail').and.returnValue(of(mockUserDetail));
     fixture.detectChanges();
-    expect(spy).toHaveBeenCalledWith(mockUserDetail.id);
+    expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledWith(component.userId);
+    expect(spy).toHaveBeenCalledTimes(1);
     expect(component.userDetail).toEqual(mockUserDetail);
   });
 
   it('should return user cart list when getUserCartList is called', () => {
+    component.userId = mockUserDetail.id;
     const spy = spyOn(userService, 'getUserCartList').and.returnValue(of(mockUserCartList));
     fixture.detectChanges();
     component.getUserCartList();
-    expect(spy).toHaveBeenCalledWith(mockUserDetail.id);
+    expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledWith(component.userId);
     expect(spy).toHaveBeenCalledTimes(1);
     expect(component.userCardList).toEqual(mockUserCartList);
+  });
+
+  it('should call updateUserCard from UserService', () => {
+    const products: IProduct[] = mockUserCartList[0].products;
+    const spy = spyOn(userService, 'updateUserCard').and.callThrough();
+    fixture.detectChanges();
+    component.updateUserCard(products);
+    expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledWith(products);
+    expect(spy).toHaveBeenCalledTimes(1);
   });
 });
