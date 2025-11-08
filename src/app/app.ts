@@ -16,14 +16,13 @@ export class App implements OnInit {
   ngOnInit(): void {
     this.userId = 6;
     this.getUserDetail();
-    this.getUserCartList();
   }
 
   getUserDetail() {
     if(!this.userId) return undefined;
     this.userService.getUserDetail(this.userId).subscribe({
       next: res => {
-        this.userDetail = res
+        this.userDetail = res;
       },
     });
   }

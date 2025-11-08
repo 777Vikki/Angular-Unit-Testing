@@ -71,8 +71,8 @@ describe('App', () => {
 
   it('should call getUserCartList from UserService', () => {
     const spy = spyOn(userService, 'getUserCartList').and.returnValue(of(mockUserCartList));
-    component.getUserCartList();
     fixture.detectChanges();
+    component.getUserCartList();
     expect(spy).toHaveBeenCalledWith(mockUserDetail.id);
     expect(spy).toHaveBeenCalled();
     expect(spy).toHaveBeenCalledTimes(1);
@@ -87,8 +87,8 @@ describe('App', () => {
 
   it('should return user cart list when getUserCartList is called', () => {
     const spy = spyOn(userService, 'getUserCartList').and.returnValue(of(mockUserCartList));
-    component.getUserCartList();
     fixture.detectChanges();
+    component.getUserCartList();
     expect(spy).toHaveBeenCalledWith(mockUserDetail.id);
     expect(spy).toHaveBeenCalledTimes(1);
     expect(component.userCardList).toEqual(mockUserCartList);
