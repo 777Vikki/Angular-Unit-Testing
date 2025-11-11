@@ -23,7 +23,7 @@ export class App implements OnInit {
     this.userService.getUserDetail(this.userId).subscribe({
       next: res => {
         this.userDetail = res
-      },
+      }
     });
   }
 

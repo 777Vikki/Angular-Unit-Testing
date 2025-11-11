@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 
 export interface IProduct {
   id: number;
@@ -77,9 +77,11 @@ export class UserService {
 
     return carts;
   }
-
+  
   getUserDetail(id: number): Observable<IUser> {
-    return this.http.get<IUser>('https://dummyjson.com/users/' + id).pipe(map(this.mapUserDetail));
+    return this.http.get<IUser>('https://dummyjson.com/users/' + id).pipe(
+      map(this.mapUserDetail)
+    );
   }
 
   getUserCartList(id: number): Observable<IUserCart[]> {
